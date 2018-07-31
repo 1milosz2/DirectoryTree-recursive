@@ -22,7 +22,7 @@ public class Main {
     }
 
     private static void DrawPathTree(File file) {
-        drawFile(file, (getIncision(file) - GIVENPATHDEPTH));
+        drawFile(file);
         if (file.isDirectory()) {
             File[] listOfFiles = file.listFiles();
             for (File f : listOfFiles) {
@@ -31,9 +31,9 @@ public class Main {
         }
     }
 
-    private static void drawFile(File file, int incision) {
+    private static void drawFile(File file) {
         StringBuilder sb = new StringBuilder();
-        sb.append(drawIncision(incision));
+        sb.append(drawIncision(getIncision(file) - GIVENPATHDEPTH));
         sb.append("--> ");
         sb.append(file.getName());
         System.out.println(sb.toString());
