@@ -8,32 +8,30 @@ import java.util.stream.IntStream;
 
 public class Main {
 
-    private static int GIVENPATHDEPTH;
-
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Please provide directory");
 
-        String GIVENPATH = scanner.nextLine();
-        GIVENPATHDEPTH = getIncision(GIVENPATH);
+        String givenPath = scanner.nextLine();
+        int givenPathDepth = getIncision(givenPath);
 
-        DrawPathTree(new File(GIVENPATH));
+        drawPathTree(new File(givenPath), givenPathDepth);
     }
 
-    private static void DrawPathTree(File file) {
-        drawFile(file);
+    private static void drawPathTree(File file, int initialPathDepth) {
+        drawFile(file, initialPathDepth);
         if (file.isDirectory()) {
             File[] listOfFiles = file.listFiles();
             for (File f : listOfFiles) {
-                DrawPathTree(f);
+                drawPathTree(f, initialPathDepth);
             }
         }
     }
 
-    private static void drawFile(File file) {
+    private static void drawFile(File file, int initialPathDepth) {
         StringBuilder sb = new StringBuilder();
-        sb.append(drawIncision(getIncision(file) - GIVENPATHDEPTH));
+        sb.append(drawIncision(getIncision(file) - initialPathDepth));
         sb.append("--> ");
         sb.append(file.getName());
         System.out.println(sb.toString());
